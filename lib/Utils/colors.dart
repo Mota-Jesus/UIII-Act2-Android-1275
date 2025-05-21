@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
-const firstColor = Color(0xFF3A825F);
-const secondColor = Color(0xFF3F966C);
-const thirdColor = Color(0xFF48A878);
+// Colores principales de la cafetería
+const firstColor = Color(0xFFA80A0A);        // Rojo oscuro
+const secondColor = Color(0xFFE3A857);       // Dorado suave
+const thirdColor = Color(0xFFA18262);        // Marrón claro
