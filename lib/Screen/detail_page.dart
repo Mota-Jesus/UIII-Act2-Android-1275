@@ -17,21 +17,15 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   int selectedSize = 2;
   int quantity = 1;
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
+        leading: BackButton(color: Colors.black),
         title: const Text(
           'Details',
           style: TextStyle(
@@ -45,191 +39,205 @@ class _DetailPageState extends State<DetailPage> {
           Center(
             child: Stack(
               children: [
-                const Icon(
-                  Icons.shopping_cart,
-                  color: Colors.amberAccent,
-                ),
+                const Icon(Icons.shopping_cart, color: Color(0xff9e9e9e)),
                 Positioned(
-                  right: 2,
-                  top: 1,
+                  right: 3,
+                  top: 0,
                   child: Container(
                     width: 8,
                     height: 8,
                     decoration: const BoxDecoration(
-                        color: firstColor, shape: BoxShape.circle),
+                      color: firstColor,
+                      shape: BoxShape.circle,
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
-          const SizedBox(width: 15)
+          const SizedBox(width: 15),
         ],
       ),
-      body: Stack(children: [
-        const Background(),
-        Positioned(
-          left: 20,
-          right: 20,
-          child: Column(
-            children: [
-              Hero(
-                tag: widget.product.name,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.81,
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  child: ProductImage(product: widget.product),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
+        children: [
+          const Background(),
+          Positioned.fill(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width/1.5,
-                    child: Text(
-                      widget.product.name,
-                      maxLines: 2,
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        '\$${widget.product.price.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                            color: firstColor,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900),
-                      ),
-                      const Text(
-                        'Best Sales',
-                        style: TextStyle(
-                            color: Colors.black45, fontSize: 12),
-                      )
-                    ],
-                  )
-                ],
-              ),
-              const SizedBox(height: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Size Options',
-                    style: TextStyle(
-                        color: Colors.black38,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: 
-                      List.generate(sizeOptions.length, (index) {
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedSize = index;
-                            });
-                          },
-                          child: SizeOptionItem(
-                            index: index,
-                            selected: selectedSize == index ? true : false,
-                            sizeOption: sizeOptions[index],
-                          ),
-                        );
-                      })
-                    
-                  )
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (quantity > 1) {
-                              quantity--;
-                            }
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: secondColor,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.remove,
-                            size: 20,
+                  Hero(
+  tag: widget.product.name,
+  child: SizedBox(
+    width: 200, // ancho fijo más pequeño
+    height: 230, // alto fijo más pequeño
+    child: ProductImage(product: widget.product),
+  ),
+),
 
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        quantity.toString(),
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(width: 10),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            quantity++;
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: secondColor,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.add,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 30),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                      decoration: BoxDecoration(
-                          color: secondColor,
-                          borderRadius: BorderRadius.circular(30)),
-                      child: const Center(
+                  const SizedBox(height: 15),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 3,
                         child: Text(
-                          'Add to Order',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
+                          widget.product.name,
+                          maxLines: 2,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                    ),
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              '\$${widget.product.price.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                color: firstColor,
+                                fontSize: 26,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Text(
+                              'Best Sales',
+                              style: TextStyle(
+                                color: Colors.black45,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Size Options',
+                        style: TextStyle(
+                          color: Colors.black38,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: List.generate(
+                            sizeOptions.length,
+                            (index) => Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedSize = index;
+                                  });
+                                },
+                                child: SizeOptionItem(
+                                  index: index,
+                                  selected: selectedSize == index,
+                                  sizeOption: sizeOptions[index],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  Row(
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (quantity > 1) quantity--;
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: const BoxDecoration(
+                                color: secondColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.remove,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            quantity.toString(),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                quantity++;
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: const BoxDecoration(
+                                color: secondColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.add,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: secondColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                          ),
+                          child: const Text(
+                            'Add to Order',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
                 ],
               ),
-            ],
+            ),
           ),
-        )
-      ]),
+        ],
+      ),
     );
   }
 }

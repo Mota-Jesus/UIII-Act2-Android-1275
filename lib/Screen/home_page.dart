@@ -51,14 +51,18 @@ class _HomePageState extends State<HomePage> {
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-  "https://your-image-url.com/coffee-cup.png",
+           Image.network(
+  "https://raw.githubusercontent.com/Mota-Jesus/Coffee_n_roses/main/flor.jpg",
   height: 30,
-  color: Colors.amber,
+  // color: Colors.amber, // <-- Esto puede ocultar o dañar la visibilidad
   errorBuilder: (context, error, stackTrace) => Icon(Icons.image_not_supported),
   loadingBuilder: (context, child, loadingProgress) {
     if (loadingProgress == null) return child;
-    return CircularProgressIndicator();
+    return SizedBox(
+      width: 20,
+      height: 20,
+      child: CircularProgressIndicator(strokeWidth: 2),
+    );
   },
 ),
             const SizedBox(
@@ -68,14 +72,14 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Qahwa',
+                  'Coffee n Roses',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Space',
+                  'blah blah blah',
                   style: TextStyle(
                     color: Colors.black45,
                     fontSize: 14,
@@ -91,7 +95,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 const Icon(
                   Icons.shopping_cart,
-                  color: Colors.amber,
+                  color: Color(0xff9e9e9e),
                 ),
                 Positioned(
                   right: 3,
@@ -113,10 +117,10 @@ class _HomePageState extends State<HomePage> {
         children: [
           const Background(),
           const Positioned(
-            top: 30,
+            top: 10,
             left: 40,
             child: Text(
-              'Soft and Wet\nGo Beyond',
+              '¿Que deseas \ntomar hoy?',
               style: TextStyle(
                   color: Colors.black,
                   height: 1.2,
@@ -126,7 +130,7 @@ class _HomePageState extends State<HomePage> {
           ),
           // for selected items
           Positioned(
-            top: 120,
+            top: 75,
             child: ClipPath(
               clipper: Clip(),
               child: Container(
@@ -138,9 +142,9 @@ class _HomePageState extends State<HomePage> {
                     categories.length,
                     (index) => Container(
                       height: 190,
-                      width: 107,
+                      width:98,
                       color: currentCategory == index
-                          ? Colors.amberAccent
+                          ? Color(0xff9e9e9e)
                           : Colors.transparent,
                     ),
                   ),
@@ -150,7 +154,7 @@ class _HomePageState extends State<HomePage> {
           ),
           // for category items display
           Positioned(
-            top: 125,
+            top:80,
             child: ClipPath(
               clipper: Clip(),
               child: Container(
@@ -194,7 +198,7 @@ class _HomePageState extends State<HomePage> {
           ),
           // for selected category items display on
           Positioned(
-            bottom: 0,
+            bottom: -25,
             child: ClipPath(
               clipper: Clip(),
               child: Container(
