@@ -11,7 +11,7 @@ List<Category> categories = [
   ),
   Category(
     image:
-        'https://raw.githubusercontent.com/Mota-Jesus/UIII_Act2_Android_1275/main/Bebidas.png',
+        'https://raw.githubusercontent.com/Mota-Jesus/Coffee_n_roses/main/Bebidas.png',
     name: 'Drinks',
   ),
   Category(

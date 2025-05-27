@@ -44,7 +44,7 @@ class ProductImage extends StatelessWidget {
                         width: constrain.maxWidth * 0.9,
                         height: constrain.maxWidth * 1.5,
                         child: Image(
-                          image: product.image.startsWith('http')
+                          image: product.image.startsWith('https')
                               ? NetworkImage(product.image)
                               : AssetImage('images/${product.image}')
                                   as ImageProvider,
